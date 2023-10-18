@@ -1,5 +1,3 @@
-'use client'
-
 import { Button, ButtonGroup } from '@nextui-org/react'
 import NextLink from 'next/link'
 
