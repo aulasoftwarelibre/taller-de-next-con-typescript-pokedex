@@ -9,6 +9,7 @@ import {
   NavbarItem,
 } from '@nextui-org/react'
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
 
 import ThemeSwitcher from '@/components/ThemeSwitcher/ThemeSwitcher'
 
@@ -27,7 +28,9 @@ export default function RootLayout({
         <Providers>
           <Navbar position="static">
             <NavbarBrand>
-              <p className="font-bold text-inherit">Pokedex</p>
+              <Link href="/" className="font-bold text-2xl">
+                Pokedex
+              </Link>
             </NavbarBrand>
             <NavbarContent justify="end">
               <NavbarItem>
