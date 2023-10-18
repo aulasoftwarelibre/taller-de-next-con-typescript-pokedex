@@ -1,5 +1,3 @@
-'use client'
-
 import { MoonIcon, SunIcon } from '@heroicons/react/24/solid'
 import { Switch } from '@nextui-org/react'
 import { useTheme } from 'next-themes'
