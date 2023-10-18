@@ -1,9 +1,13 @@
+'use client'
+
+import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 
 import { PokedexContentProps } from './types'
 
 const useController = (props: PokedexContentProps) => {
   const [specimens, setSpecimens] = useState(props.specimens)
+  const router = useRouter()
 
   useEffect(() => {
     setSpecimens(props.specimens)
@@ -22,6 +26,8 @@ const useController = (props: PokedexContentProps) => {
           : specimen,
       ),
     )
+
+    router.refresh()
   }
 
   const onDislike = async (id: number) => {
@@ -37,6 +43,8 @@ const useController = (props: PokedexContentProps) => {
           : specimen,
       ),
     )
+
+    router.refresh()
   }
 
   return { onDislike, onLike, specimens }
