@@ -1,12 +1,11 @@
+import { PokemonRepository } from '@/lib/pokemon/domain/services/pokemon-repository'
 import PokemonLikeTable from '@/services/database/schema/PokemonLikeTable'
 import PokeAPI from '@/services/poke-api/poke-api'
 
 import Pokemon from '../../domain/model/pokemon'
-import { PokemonColor } from '../../domain/model/pokemon-color'
 import { PokemonCursor } from '../../domain/model/pokemon-cursor'
-import { PokemonRepository as PokemonRepositoryBase } from '../../domain/services/pokemon-repository'
 
-class PokemonRepository implements PokemonRepositoryBase {
+class NextPokemonRepository implements PokemonRepository {
   constructor(
     private readonly pokeAPI: PokeAPI,
     private readonly pokemonLikeTable: PokemonLikeTable,
@@ -58,7 +57,7 @@ class PokemonRepository implements PokemonRepositoryBase {
     } = species
 
     return Pokemon.with({
-      color: color as PokemonColor,
+      color,
       id: pokemon.id,
       image,
       liked,
@@ -68,4 +67,4 @@ class PokemonRepository implements PokemonRepositoryBase {
   }
 }
 
-export default PokemonRepository
+export default NextPokemonRepository

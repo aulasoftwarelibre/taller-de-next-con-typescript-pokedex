@@ -12,7 +12,16 @@ interface Pokemon {
 const Pokemon = {
   dislike: (props: Pokemon): Pokemon => ({ ...props, liked: false }),
   like: (props: Pokemon): Pokemon => ({ ...props, liked: true }),
-  with: (props: Pokemon): Pokemon => props,
+  with: ({
+    ...props
+  }: {
+    color: string
+    id: number
+    image: string
+    liked: boolean
+    name: string
+    types: string[]
+  }): Pokemon => <Pokemon>{ ...props },
 }
 
 export default Pokemon
