@@ -1,5 +1,6 @@
+import { PokemonRepository } from '@/lib/pokemon/domain/services/pokemon-repository'
+
 import Pokemon from '../../domain/model/pokemon'
-import PokemonRepository from '../../infrastructure/services/pokemon-repository'
 
 class DislikePokemonUseCase {
   constructor(private readonly pokemon: PokemonRepository) {}

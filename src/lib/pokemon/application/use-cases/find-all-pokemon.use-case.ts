@@ -1,4 +1,5 @@
-import { PokemonRepository } from '../../domain/services/pokemon-repository'
+import { PokemonRepository } from '@/lib/pokemon/domain/services/pokemon-repository'
+
 import { FindAllPokemonResponse } from './types'
 
 class FindAllPokemonUseCase {
