@@ -1,3 +1,6 @@
+// eslint-disable-next-line camelcase
+import { unstable_cache } from 'next/cache'
+
 import { PokemonRepository } from '@/lib/pokemon/domain/services/pokemon-repository'
 import PokemonLikeTable from '@/services/database/schema/PokemonLikeTable'
 import PokeAPI from '@/services/poke-api/poke-api'
@@ -38,7 +41,13 @@ class NextPokemonRepository implements PokemonRepository {
     const species = await this.pokeAPI.getPokemonSpeciesItem(id)
 
     const { is_liked: liked = false } =
-      (await this.pokemonLikeTable.find(pokemon.id)) || {}
+      (await unstable_cache(
+        async (_id) => await this.pokemonLikeTable.find(_id),
+        [`pokemon-like`],
+        {
+          tags: [`pokemon-like-${pokemon.id}`],
+        },
+      )(pokemon.id)) || {}
 
     const {
       name,
