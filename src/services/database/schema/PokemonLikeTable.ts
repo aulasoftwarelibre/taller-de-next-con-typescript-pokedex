@@ -24,7 +24,7 @@ class PokemonLikeTable {
   }
 
   async find(id: number) {
-    return await this.database<PokemonLike>(POKEMON_LIKE_TABLE)
+    return this.database<PokemonLike>(POKEMON_LIKE_TABLE)
       .select('*')
       .where('id', id)
       .first()

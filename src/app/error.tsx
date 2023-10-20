@@ -27,7 +27,7 @@ export default function Error({ error, reset }: ErrorBoundaryProps) {
 
         <p className="text-gray-500">
           We get this error: {error.message}
-          {error.digest && ` [code: {error.digest}]`}.
+          {error.digest && ` [code: ${error.digest}]`}.
         </p>
 
         <Button onClick={() => reset()}>Go Back Home</Button>
