@@ -2,8 +2,8 @@
 
 import { useTransition } from 'react'
 
-import { dislike, like } from '@/app/pokedex/actions'
 import { PokemonLikeButtonProps } from '@/components/PokemonLikeButton/types'
+import { dislike, like } from '@/lib/pokemon/infrastructure/actions'
 
 export const useController = (props: PokemonLikeButtonProps) => {
   const {
