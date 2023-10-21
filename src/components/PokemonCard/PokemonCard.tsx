@@ -1,23 +1,13 @@
-import { HeartIcon } from '@heroicons/react/24/outline'
-import { HeartIcon as FullHeartIcon } from '@heroicons/react/24/solid'
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  Chip,
-  Image,
-} from '@nextui-org/react'
+import { Card, CardBody, CardFooter, Chip, Image } from '@nextui-org/react'
 import NextImage from 'next/image'
+
+import PokemonLikeButton from '@/components/PokemonLikeButton/PokemonLikeButton'
 
 import { PokemonStyle } from './constants'
 import { PokemonMiniCardProps } from './types'
 
-export default function PokemonMiniCard({
-  onDisliked,
-  onLiked,
-  pokemon: { color, id, image, liked, name, types },
-}: PokemonMiniCardProps) {
+export default function PokemonMiniCard({ pokemon }: PokemonMiniCardProps) {
+  const { color, id, image, name, types } = pokemon
   const style = PokemonStyle[color as keyof typeof PokemonStyle]
 
   return (
@@ -31,19 +21,7 @@ export default function PokemonMiniCard({
           <p className={`text-2xl ${style.text} align-baseline`}>
             #{id.toString().padStart(3, '0')}
           </p>
-          <Button
-            isIconOnly
-            radius="full"
-            variant="light"
-            className={`${style.text}`}
-            onClick={() => (liked ? onDisliked(id) : onLiked(id))}
-          >
-            {liked ? (
-              <FullHeartIcon className="text-red-700" height="32" />
-            ) : (
-              <HeartIcon height="32" />
-            )}
-          </Button>
+          <PokemonLikeButton pokemon={pokemon} />
         </div>
         <div className="flex flew-row justify-between items-end">
           <p className={`text-3xl capitalize ${style.text} align-baseline`}>
