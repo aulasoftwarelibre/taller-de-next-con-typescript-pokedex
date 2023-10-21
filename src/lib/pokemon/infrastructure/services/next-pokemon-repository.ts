@@ -40,14 +40,14 @@ class NextPokemonRepository implements PokemonRepository {
     const pokemon = await this.pokeAPI.getPokemonItem(id)
     const species = await this.pokeAPI.getPokemonSpeciesItem(id)
 
-    const { is_liked: liked = false } =
-      (await unstable_cache(
-        async (_id) => await this.pokemonLikeTable.find(_id),
-        [`pokemon-like`],
-        {
-          tags: [`pokemon-like-${pokemon.id}`],
-        },
-      )(pokemon.id)) || {}
+    const liked = await unstable_cache(
+      async (_id: number) =>
+        (await this.pokemonLikeTable.find(_id))?.is_liked || false,
+      [`pokemon-like`],
+      {
+        tags: [`pokemon-like-${pokemon.id}`],
+      },
+    )(pokemon.id)
 
     const {
       name,
