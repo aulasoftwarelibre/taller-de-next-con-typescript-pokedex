@@ -1,5 +1,3 @@
-import 'server-only'
-
 import DislikePokemonUseCase from '@/lib/pokemon/application/use-cases/dislike-pokemon.use-case'
 import FindAllPokemonUseCase from '@/lib/pokemon/application/use-cases/find-all-pokemon.use-case'
 import LikePokemonUseCase from '@/lib/pokemon/application/use-cases/like-pokemon.use-case'
