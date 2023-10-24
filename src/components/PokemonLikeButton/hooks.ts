@@ -11,11 +11,11 @@ export const useController = (props: PokemonLikeButtonProps) => {
   } = props
   const [isLoading, startTransaction] = useTransition()
 
-  const onLiked = async () => {
+  const onLiked = () => {
     startTransaction(() => like(id))
   }
 
-  const onDisliked = async () => {
+  const onDisliked = () => {
     startTransaction(() => dislike(id))
   }
 
