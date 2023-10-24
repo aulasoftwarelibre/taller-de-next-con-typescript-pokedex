@@ -2,16 +2,16 @@
 
 import { revalidateTag } from 'next/cache'
 
-import { dislikePokemon, likePokemon } from '@/services/container/container'
+import container from '@/services/container'
 
 async function like(id: number) {
-  await likePokemon.with(id)
+  await container.likePokemon.with(id)
 
   revalidateTag(`pokemon-like-${id}`)
 }
 
 async function dislike(id: number) {
-  await dislikePokemon.with(id)
+  await container.dislikePokemon.with(id)
 
   revalidateTag(`pokemon-like-${id}`)
 }
