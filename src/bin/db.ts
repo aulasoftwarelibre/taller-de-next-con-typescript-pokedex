@@ -1,7 +1,9 @@
-import { pokemonLikeTable } from '@/services/container/container'
+import config from '@/services/container/config'
+import Database from '@/services/database/database'
 
 async function createTables() {
-  await pokemonLikeTable.create()
+  const database = new Database(config.database)
+  await database.pokemonLikeTable.create()
 }
 
 createTables()
