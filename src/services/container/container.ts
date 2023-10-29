@@ -4,8 +4,8 @@ import DislikePokemonUseCase from '@/lib/pokemon/application/use-cases/dislike-p
 import FindAllPokemonUseCase from '@/lib/pokemon/application/use-cases/find-all-pokemon.use-case'
 import LikePokemonUseCase from '@/lib/pokemon/application/use-cases/like-pokemon.use-case'
 import InMemoryPokemonLikeRepository from '@/lib/pokemon/infrastructure/services/in-memory-pokemon-like-repository'
-import NextPokemonLikeRepository from '@/lib/pokemon/infrastructure/services/next-pokemon-like-repository'
 import PokeAPIPokemonRepository from '@/lib/pokemon/infrastructure/services/poke-api-pokemon-repository'
+import SQLitePokemonLikeRepository from '@/lib/pokemon/infrastructure/services/sqlite-pokemon-like-repository'
 
 import Database from '../database/database'
 import PokeAPI from '../poke-api/poke-api'
@@ -44,7 +44,7 @@ export class Container {
 
     const pokemonLikeRepository = activeInMemoryRepository
       ? new InMemoryPokemonLikeRepository()
-      : new NextPokemonLikeRepository(
+      : new SQLitePokemonLikeRepository(
           new Database(config.database).pokemonLikeTable,
         )
 
