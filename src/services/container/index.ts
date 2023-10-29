@@ -1,12 +1,14 @@
-import { Container } from '@/services/container/container'
+import Container from '@/services/container/container'
 
 export const globalForContainer = global as unknown as {
-  container: ReturnType<typeof Container.init>
+  container: typeof Container
 }
 
-export const container = globalForContainer.container || Container.init()
+const container = globalForContainer.container || Container
 
 if (process.env.NODE_ENV !== 'production')
   globalForContainer.container = container
 
-export default container
+export const likePokemon = container.likePokemon
+export const dislikePokemon = container.dislikePokemon
+export const findAllPokemon = container.findAllPokemon

@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 import Pokedex from '@/components/Pokedex/Pokedex'
 import { Params } from '@/lib/next/types'
-import container from '@/services/container'
+import { findAllPokemon } from '@/services/container'
 
 export const metadata: Metadata = {
   description: 'Demo application for the Software Architecture Workshop',
@@ -12,10 +12,7 @@ export const metadata: Metadata = {
 export default async function Page({ searchParams }: { searchParams: Params }) {
   const { limit = '6', offset = '0' } = searchParams
 
-  const page = await container.findAllPokemon.with(
-    Number(limit),
-    Number(offset),
-  )
+  const page = await findAllPokemon.with(Number(limit), Number(offset))
 
   return (
     <>
