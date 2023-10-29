@@ -7,7 +7,7 @@ import { dislike, like } from '@/lib/pokemon/infrastructure/actions'
 
 export const useController = (props: PokemonLikeButtonProps) => {
   const {
-    pokemon: { id },
+    pokemonLiked: { id },
   } = props
   const [isLoading, startTransaction] = useTransition()
 

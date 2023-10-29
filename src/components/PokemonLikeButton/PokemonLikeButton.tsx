@@ -12,7 +12,7 @@ export default function PokemonLikeButton(props: PokemonLikeButtonProps) {
     isLoading,
     onDisliked,
     onLiked,
-    pokemon: { liked },
+    pokemonLiked: { liked },
   } = useController(props)
 
   return (

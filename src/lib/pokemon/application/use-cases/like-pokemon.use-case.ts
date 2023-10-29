@@ -1,14 +1,13 @@
-import { PokemonRepository } from '@/lib/pokemon/domain/services/pokemon-repository'
-
-import Pokemon from '../../domain/model/pokemon'
+import PokemonLike from '@/lib/pokemon/domain/pokemon-like/model/pokemon-like'
+import { PokemonLikeRepository } from '@/lib/pokemon/domain/pokemon-like/services/pokemon-like-repository'
 
 class LikePokemonUseCase {
-  constructor(private readonly pokemon: PokemonRepository) {}
+  constructor(private readonly pokemonLikeRepository: PokemonLikeRepository) {}
 
   async with(id: number): Promise<void> {
-    const pokemon = await this.pokemon.find(id)
+    const pokemonLike = await this.pokemonLikeRepository.find(id)
 
-    await this.pokemon.save(Pokemon.like(pokemon))
+    await this.pokemonLikeRepository.save(PokemonLike.like(pokemonLike))
   }
 }
 

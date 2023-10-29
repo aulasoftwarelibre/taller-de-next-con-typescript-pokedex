@@ -6,8 +6,10 @@ import PokemonLikeButton from '@/components/PokemonLikeButton/PokemonLikeButton'
 import { PokemonStyle } from './constants'
 import { PokemonMiniCardProps } from './types'
 
-export default function PokemonMiniCard({ pokemon }: PokemonMiniCardProps) {
-  const { color, id, image, name, types } = pokemon
+export default function PokemonMiniCard({
+  pokemonLiked,
+}: PokemonMiniCardProps) {
+  const { color, id, image, name, types } = pokemonLiked
   const style = PokemonStyle[color as keyof typeof PokemonStyle]
 
   return (
@@ -21,7 +23,7 @@ export default function PokemonMiniCard({ pokemon }: PokemonMiniCardProps) {
           <p className={`text-2xl ${style.text} align-baseline`}>
             #{id.toString().padStart(3, '0')}
           </p>
-          <PokemonLikeButton pokemon={pokemon} />
+          <PokemonLikeButton pokemonLiked={pokemonLiked} />
         </div>
         <div className="flex flew-row justify-between items-end">
           <p className={`text-3xl capitalize ${style.text} align-baseline`}>

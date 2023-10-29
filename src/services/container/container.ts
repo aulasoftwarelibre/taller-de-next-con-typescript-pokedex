@@ -3,8 +3,9 @@ import 'server-only'
 import DislikePokemonUseCase from '@/lib/pokemon/application/use-cases/dislike-pokemon.use-case'
 import FindAllPokemonUseCase from '@/lib/pokemon/application/use-cases/find-all-pokemon.use-case'
 import LikePokemonUseCase from '@/lib/pokemon/application/use-cases/like-pokemon.use-case'
-import InMemoryPokemonRepository from '@/lib/pokemon/infrastructure/services/in-memory-pokemon-repository'
-import NextPokemonRepository from '@/lib/pokemon/infrastructure/services/next-pokemon-repository'
+import InMemoryPokemonLikeRepository from '@/lib/pokemon/infrastructure/services/in-memory-pokemon-like-repository'
+import NextPokemonLikeRepository from '@/lib/pokemon/infrastructure/services/next-pokemon-like-repository'
+import PokeAPIPokemonRepository from '@/lib/pokemon/infrastructure/services/poke-api-pokemon-repository'
 
 import Database from '../database/database'
 import PokeAPI from '../poke-api/poke-api'
@@ -17,13 +18,17 @@ const activeInMemoryRepository = ['1', 't', 'true'].includes(
 export class Container {
   static init() {
     // You can change the database repository implementation in .env file
-    const pokemonRepository = this.configureRepository()
+    const { pokemonLikeRepository, pokemonRepository } =
+      this.configureRepositories()
 
-    const findAllPokemon = new FindAllPokemonUseCase(pokemonRepository)
+    const findAllPokemon = new FindAllPokemonUseCase(
+      pokemonRepository,
+      pokemonLikeRepository,
+    )
 
-    const likePokemon = new LikePokemonUseCase(pokemonRepository)
+    const likePokemon = new LikePokemonUseCase(pokemonLikeRepository)
 
-    const dislikePokemon = new DislikePokemonUseCase(pokemonRepository)
+    const dislikePokemon = new DislikePokemonUseCase(pokemonLikeRepository)
 
     return {
       dislikePokemon,
@@ -32,15 +37,18 @@ export class Container {
     }
   }
 
-  private static configureRepository() {
+  private static configureRepositories() {
     const pokeAPI = new PokeAPI()
 
-    return activeInMemoryRepository
-      ? new InMemoryPokemonRepository(pokeAPI)
-      : new NextPokemonRepository(
-          pokeAPI,
+    const pokemonRepository = new PokeAPIPokemonRepository(pokeAPI)
+
+    const pokemonLikeRepository = activeInMemoryRepository
+      ? new InMemoryPokemonLikeRepository()
+      : new NextPokemonLikeRepository(
           new Database(config.database).pokemonLikeTable,
         )
+
+    return { pokemonLikeRepository, pokemonRepository }
   }
 }
 

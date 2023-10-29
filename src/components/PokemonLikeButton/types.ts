@@ -1,5 +1,5 @@
-import Pokemon from '@/lib/pokemon/domain/model/pokemon'
+import { PokemonLiked } from '@/lib/pokemon/application/use-cases/types'
 
 export interface PokemonLikeButtonProps {
-  pokemon: Pokemon
+  pokemonLiked: PokemonLiked
 }

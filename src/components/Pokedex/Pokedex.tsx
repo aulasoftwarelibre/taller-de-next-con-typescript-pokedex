@@ -15,7 +15,7 @@ export default function Pokedex(props: PokedexProps) {
   const cards = useMemo(
     () =>
       specimens.map((specimen) => (
-        <PokemonMiniCard key={specimen.id} pokemon={specimen} />
+        <PokemonMiniCard key={specimen.id} pokemonLiked={specimen} />
       )),
     [specimens],
   )
